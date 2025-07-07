@@ -1,12 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { TodoItem } from './TodoItem';
 
-const TodoList = [
-	{ id: 1, task: "abc", complated: true },
-	{ id: 2, task: "def", complated: false },
-	{ id: 3, task: "ghi", complated: true },
-	{ id: 4, task: "jkl", complated: false },
+export type TodoItemType = {
+	id: number;
+	task: string;
+	completed: boolean;
+};
+
+const TodoList: TodoItemType[] = [
+	{ id: 1, task: "abc", completed: true },
+	{ id: 2, task: "def", completed: false },
+	{ id: 3, task: "ghi", completed: true },
+	{ id: 4, task: "jkl", completed: false },
 ]
 
 function App() {
@@ -14,22 +19,11 @@ function App() {
 		<div>
 			<ul>
 				{TodoList.map((todo) => (
-					<li key={todo.id}>{todo.task} {todo.complated}</li>
+					<TodoItem todoItem={todo} />
 				))}
 			</ul>
-			<Child name="React" />
-			<Child name="Next.js" />
-			<Child name="Python3" />
 		</div>
 	);
-}
-
-type Props = {
-	name: string;
-};
-
-function Child(props: Props) {
-	return <span>{props.name}</span>;
 }
 
 export default App;

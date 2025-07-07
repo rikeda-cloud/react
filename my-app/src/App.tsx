@@ -11,13 +11,25 @@ const TodoList = [
 
 function App() {
 	return (
-		<ul>
-			{TodoList.map((todo) => (
-				<li key={todo.id}>{todo.task} {todo.complated}</li>
-			))}
-		</ul>
-
+		<div>
+			<ul>
+				{TodoList.map((todo) => (
+					<li key={todo.id}>{todo.task} {todo.complated}</li>
+				))}
+			</ul>
+			<Child name="React" />
+			<Child name="Next.js" />
+			<Child name="Python3" />
+		</div>
 	);
+}
+
+type Props = {
+	name: string;
+};
+
+function Child(props: Props) {
+	return <span>{props.name}</span>;
 }
 
 export default App;

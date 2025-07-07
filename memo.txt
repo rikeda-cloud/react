@@ -6,3 +6,7 @@ npx create-react-app {project name} --template typescript
 
 # Reactアプリケーションの立ち上げ
 npm start
+
+
+############
+* 親コンポーネントから子コンポーネントにデータを渡す際に使用するpropsという変数は予約語ではなく、Reactの慣習

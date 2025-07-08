@@ -1,6 +1,7 @@
 import './App.css';
 import { TodoItem } from './TodoItem';
 import { Count } from './Count';
+import { User } from './User';
 import React from "react";
 
 export type TodoItemType = {
@@ -28,6 +29,7 @@ function App() {
 				))}
 			</ul>
 			<Count count={count} setCount={setCount} />
+			<User />
 		</div>
 	);
 }

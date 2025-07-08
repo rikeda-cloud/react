@@ -1,6 +1,7 @@
 import './App.css';
 import { TodoItem } from './TodoItem';
 import { Count } from './Count';
+import { CounterReducer } from './CounterReducer';
 import { User } from './User';
 import { ReadOnlyText, WriteableText } from './Text';
 import { ColorForm } from './ColorForm';
@@ -31,6 +32,7 @@ function App() {
 				))}
 			</ul>
 			<Count count={count} setCount={setCount} />
+			<CounterReducer />
 			<User />
 			<ReadOnlyText />
 			<WriteableText />

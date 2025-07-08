@@ -22,7 +22,7 @@ function App() {
 		<div>
 			<ul>
 				{TodoList.map((todo) => (
-					<TodoItem todoItem={todo}>
+					<TodoItem key={todo.id} todoItem={todo}>
 						<div>This is children プロパティ</div>
 					</TodoItem>
 				))}

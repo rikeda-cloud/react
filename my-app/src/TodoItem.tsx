@@ -16,7 +16,7 @@ export function TodoItem(props: Props) {
 		fontSize: props.todoItem.completed ? "32px" : "16px",
 	};
 	return (
-		<li key={props.todoItem.id} style={itemStyle}>
+		<li style={itemStyle}>
 			{props.todoItem.task}
 			{props.children}
 			<button onClick={onDeleteButton}>DELETE</button>

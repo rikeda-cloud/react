@@ -2,6 +2,7 @@ import './App.css';
 import { TodoItem } from './TodoItem';
 import { Count } from './Count';
 import { User } from './User';
+import { ReadOnlyText, WriteableText } from './Text';
 import React from "react";
 
 export type TodoItemType = {
@@ -30,6 +31,8 @@ function App() {
 			</ul>
 			<Count count={count} setCount={setCount} />
 			<User />
+			<ReadOnlyText />
+			<WriteableText />
 		</div>
 	);
 }

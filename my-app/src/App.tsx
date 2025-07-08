@@ -3,6 +3,7 @@ import { TodoItem } from './TodoItem';
 import { Count } from './Count';
 import { User } from './User';
 import { ReadOnlyText, WriteableText } from './Text';
+import { ColorForm } from './ColorForm';
 import React from "react";
 
 export type TodoItemType = {
@@ -33,6 +34,7 @@ function App() {
 			<User />
 			<ReadOnlyText />
 			<WriteableText />
+			<ColorForm />
 		</div>
 	);
 }

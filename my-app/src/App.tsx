@@ -1,12 +1,14 @@
+import React from 'react';
+import { TooltipExample } from './TooltipExample';
 import './App.css';
-import { Clock } from "./Clock";
 
 function App() {
-
 	return (
-		<>
-			<Clock />
-		</>
+		<div className="App">
+			<header className="App-header">
+				<TooltipExample />
+			</header>
+		</div>
 	);
 }
 

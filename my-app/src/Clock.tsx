@@ -9,8 +9,8 @@ export function Clock() {
 		second: "2-digit",
 		hour12: false // 24時間表記に変更
 	});
-	const time = formatter.format(date);
 
+	const time = formatter.format(date);
 	React.useEffect(() => {
 		const timerId = setTimeout(() => {
 			setDate(new Date());

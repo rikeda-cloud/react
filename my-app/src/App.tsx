@@ -5,6 +5,7 @@ import { CounterReducer } from './CounterReducer';
 import { User } from './User';
 import { ReadOnlyText, WriteableText } from './Text';
 import { ColorForm } from './ColorForm';
+import { RefCounter } from "./RefCounter";
 import React from "react";
 
 export type TodoItemType = {
@@ -37,6 +38,7 @@ function App() {
 			<ReadOnlyText />
 			<WriteableText />
 			<ColorForm />
+			<RefCounter />
 		</div>
 	);
 }

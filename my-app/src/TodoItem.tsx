@@ -1,5 +1,10 @@
 import React from "react";
-import { type TodoItemType } from "./App";
+
+type TodoItemType = {
+	id: number;
+	task: string;
+	completed: boolean;
+};
 
 type Props = {
 	todoItem: TodoItemType;

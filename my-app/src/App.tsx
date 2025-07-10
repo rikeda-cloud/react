@@ -1,13 +1,14 @@
-import React from 'react';
-import { TooltipExample } from './TooltipExample';
 import './App.css';
+import { Clock } from "./Clock";
+import { UnControlForm } from "./UnControlForm";
+import { ControlForm } from "./ControlForm";
 
 function App() {
 	return (
-		<div className="App">
-			<header className="App-header">
-				<TooltipExample />
-			</header>
+		<div>
+			<Clock />
+			<UnControlForm />
+			<ControlForm />
 		</div>
 	);
 }

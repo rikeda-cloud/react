@@ -1,12 +1,10 @@
 import './App.css';
-import { Clock } from "./Clock";
-import { EventPoint } from "./EventPoint";
+import { EventPropagation } from "./EventPropagation";
 
 function App() {
 	return (
 		<div>
-			<EventPoint />
-			<Clock />
+			<EventPropagation />
 		</div>
 	);
 }

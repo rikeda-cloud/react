@@ -1,14 +1,14 @@
 import './App.css';
 import { Clock } from "./Clock";
-import { UnControlForm } from "./UnControlForm";
-import { ControlForm } from "./ControlForm";
+import { EventBasic } from "./EventBasic";
 
 function App() {
 	return (
 		<div>
 			<Clock />
-			<UnControlForm />
-			<ControlForm />
+			<EventBasic type="date" />
+			<EventBasic type="time" />
+			<EventBasic />
 		</div>
 	);
 }

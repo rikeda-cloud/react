@@ -1,18 +1,12 @@
 import './App.css';
 import { Clock } from "./Clock";
-import { EventBasic } from "./EventBasic";
-import { CountParent } from "./CountParentChild";
-import { EventMouse } from "./EventMouse";
+import { EventPoint } from "./EventPoint";
 
 function App() {
 	return (
 		<div>
+			<EventPoint />
 			<Clock />
-			<EventBasic type="date" />
-			<EventBasic type="time" />
-			<EventBasic />
-			<CountParent />
-			<EventMouse />
 		</div>
 	);
 }

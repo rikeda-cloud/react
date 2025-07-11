@@ -1,6 +1,7 @@
 import './App.css';
 import { Clock } from "./Clock";
 import { EventBasic } from "./EventBasic";
+import { CountParent } from "./CountParentChild";
 
 function App() {
 	return (
@@ -9,6 +10,7 @@ function App() {
 			<EventBasic type="date" />
 			<EventBasic type="time" />
 			<EventBasic />
+			<CountParent />
 		</div>
 	);
 }

@@ -2,6 +2,7 @@ import './App.css';
 import { Clock } from "./Clock";
 import { EventBasic } from "./EventBasic";
 import { CountParent } from "./CountParentChild";
+import { EventMouse } from "./EventMouse";
 
 function App() {
 	return (
@@ -11,6 +12,7 @@ function App() {
 			<EventBasic type="time" />
 			<EventBasic />
 			<CountParent />
+			<EventMouse />
 		</div>
 	);
 }

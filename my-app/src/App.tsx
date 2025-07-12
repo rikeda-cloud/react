@@ -1,12 +1,10 @@
 import './App.css';
-import { EventPropagation } from "./EventPropagation";
-import { FormTextarea } from "./FormTextarea";
+import { FormSelect } from "./FormSelect";
 
 function App() {
 	return (
 		<div>
-			<EventPropagation />
-			<FormTextarea />
+			<FormSelect />
 		</div>
 	);
 }

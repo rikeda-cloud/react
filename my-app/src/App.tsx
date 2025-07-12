@@ -1,10 +1,10 @@
 import './App.css';
-import { FormRadio } from "./FormRadio";
+import { FormFile } from "./FormFile";
 
 function App() {
 	return (
 		<div>
-			<FormRadio />
+			<FormFile />
 		</div>
 	);
 }

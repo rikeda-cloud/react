@@ -1,10 +1,10 @@
 import './App.css';
-import { ReactHookForm } from './ReactHookForm';
+import { FormYup } from './FormYup';
 
 function App() {
 	return (
 		<div>
-			<ReactHookForm />
+			<FormYup />
 		</div>
 	);
 }

@@ -15,11 +15,18 @@ export function ReactHookForm() {
 		memo: "",
 	};
 
-	const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
-		defaultValues
-	});
+	const { register, handleSubmit, formState: {
+		errors, isDirty, isValid, isSubmitting
+	} } = useForm<FormValues>({ defaultValues });
 
-	const onsubmit = (data: FormValues) => console.log(data);
+	const onsubmit = (data: FormValues) => {
+		return new Promise<void>(resolve => {
+			setTimeout(() => {
+				resolve();
+				console.log(data);
+			}, 4000);
+		});
+	};
 	const onerror = (err: any) => console.log(err);
 
 	const validateMemo = (value: string) => {
@@ -88,7 +95,10 @@ export function ReactHookForm() {
 				<div>{errors.memo?.message}</div>
 			</div>
 			<div>
-				<button type="submit">Send</button>
+				<button type="submit" disabled={!isDirty || !isValid}>
+					Send
+				</button>
+				{isSubmitting && <div>...Send...</div>}
 			</div>
 		</form>
 	)

@@ -38,18 +38,30 @@ export function StateTodo() {
 		}));
 	};
 
+	const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+		setTodo(
+			todo.filter(item => item.id !== Number(e.currentTarget.dataset.id))
+		);
+	}
+
 	return (
 		<div>
 			<label>
 				TODO:
-				<input type="text" name="title" value={title} onChange={handleChangeTitle} />
+				<input type="text" name="title"
+					value={title} onChange={handleChangeTitle} />
 			</label>
 			<button type="button" onClick={handleClick}>Add</button><br />
 			<ul>
 				{todo.map(item => (
 					<li key={item.id} className={item.isDone ? 'done' : ""}>
 						{item.title}
-						<button type="button" onClick={handleDone} data-id={item.id}>Done</button>
+						<button type="button" onClick={handleDone} data-id={item.id}>
+							Done
+						</button>
+						<button type="button" onClick={handleDelete} data-id={item.id}>
+							Delete
+						</button>
 					</li>
 				))}
 			</ul>

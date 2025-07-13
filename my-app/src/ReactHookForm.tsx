@@ -1,19 +1,36 @@
 import { useForm } from "react-hook-form";
 
+type FormValues = {
+	name: string;
+	email: string;
+	gender: string;
+	memo: string;
+};
+
 export function ReactHookForm() {
-	const defaultValues = {
+	const defaultValues: FormValues = {
 		name: "",
 		email: "",
 		gender: "woman",
 		memo: "",
 	};
 
-	const { register, handleSubmit, formState: { errors } } = useForm({
+	const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
 		defaultValues
 	});
 
-	const onsubmit = (data: any) => console.log(data);
+	const onsubmit = (data: FormValues) => console.log(data);
 	const onerror = (err: any) => console.log(err);
+
+	const validateMemo = (value: string) => {
+		const ngs = ["rikeda", "cloud"];
+		for (const ng of ngs) {
+			if (value.includes(ng)) {
+				return "Include Ng Word";
+			}
+		}
+		return true;
+	}
 
 	return (
 		<form onSubmit={handleSubmit(onsubmit, onerror)} noValidate>
@@ -50,6 +67,10 @@ export function ReactHookForm() {
 				<input id="email" type="email"
 					{...register("email", {
 						required: "Email is required",
+						pattern: {
+							value: /[a-z][a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
+							message: "Email is not valid"
+						}
 					})} />
 				<div>{errors.email?.message}</div>
 			</div>
@@ -58,6 +79,7 @@ export function ReactHookForm() {
 				<textarea id="memo"
 					{...register("memo", {
 						required: "Memo is required",
+						validate: { ng: validateMemo },
 						minLength: {
 							value: 10,
 							message: "Memo must be at least 10 characters"

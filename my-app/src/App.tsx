@@ -1,10 +1,10 @@
 import './App.css';
-import { FormFile } from "./FormFile";
+import { StateTodo } from "./StateTodo";
 
 function App() {
 	return (
 		<div>
-			<FormFile />
+			<StateTodo />
 		</div>
 	);
 }

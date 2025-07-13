@@ -2,6 +2,16 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+const checkNgWords = (value: string) => {
+	const ngs = ["rikeda", "cloud"];
+	for (const ng of ngs) {
+		if (value.includes(ng)) {
+			return false;
+		}
+	}
+	return true;
+}
+
 const schema = yup.object({
 	name: yup
 		.string()
@@ -22,6 +32,9 @@ const schema = yup.object({
 		.label("Memo")
 		.required()
 		.min(10)
+		.test("ng",
+			({ label }) => `${label} in Ng Word`,
+			value => checkNgWords(value)),
 });
 
 export function FormYup() {

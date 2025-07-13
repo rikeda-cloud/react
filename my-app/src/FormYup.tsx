@@ -17,7 +17,8 @@ const schema = yup.object({
 		.string()
 		.label("Name")
 		.required()
-		.max(20, "Name must be at most 20 characters long"),
+		.max(20, "Name must be at most 20 characters long")
+		.trim().lowercase(),
 	gender: yup
 		.string()
 		.label("Gender")
@@ -32,6 +33,8 @@ const schema = yup.object({
 		.label("Memo")
 		.required()
 		.min(10)
+		.trim().lowercase()
+		.transform(value => value.replace(/rike/g, "1234567890"))
 		.test("ng",
 			({ label }) => `${label} in Ng Word`,
 			value => checkNgWords(value)),

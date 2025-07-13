@@ -13,6 +13,7 @@ interface Todo {
 export function StateTodo() {
 	const [title, setTitle] = React.useState("");
 	const [todo, setTodo] = React.useState<Todo[]>([]);
+	const [desc, setDesc] = React.useState(true);
 
 	const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setTitle(e.target.value);
@@ -44,6 +45,19 @@ export function StateTodo() {
 		);
 	}
 
+	const handleSort = (e: React.MouseEvent<HTMLButtonElement>) => {
+		const sorted = [...todo];
+		sorted.sort((a, b) => {
+			if (desc) {
+				return b.created.getTime() - a.created.getTime();
+			} else {
+				return a.created.getTime() - b.created.getTime();
+			}
+		});
+		setDesc(d => !d);
+		setTodo(sorted);
+	};
+
 	return (
 		<div>
 			<label>
@@ -52,6 +66,9 @@ export function StateTodo() {
 					value={title} onChange={handleChangeTitle} />
 			</label>
 			<button type="button" onClick={handleClick}>Add</button><br />
+			<button type="button" onClick={handleSort}>
+				Sort ({desc ? '^' : 'v'})
+			</button>
 			<ul>
 				{todo.map(item => (
 					<li key={item.id} className={item.isDone ? 'done' : ""}>

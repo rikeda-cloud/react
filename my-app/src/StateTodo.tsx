@@ -1,4 +1,5 @@
 import React from "react";
+import './StateTodo.css';
 
 let maxId = 0;
 
@@ -24,6 +25,19 @@ export function StateTodo() {
 		]);
 	};
 
+	const handleDone = (e: React.MouseEvent<HTMLButtonElement>) => {
+		setTodo(todo.map(item => {
+			if (item.id === Number(e.currentTarget.dataset.id)) {
+				return {
+					...item,
+					isDone: true
+				};
+			} else {
+				return item;
+			}
+		}));
+	};
+
 	return (
 		<div>
 			<label>
@@ -33,7 +47,10 @@ export function StateTodo() {
 			<button type="button" onClick={handleClick}>Add</button><br />
 			<ul>
 				{todo.map(item => (
-					<li key={item.id}>{item.title}</li>
+					<li key={item.id} className={item.isDone ? 'done' : ""}>
+						{item.title}
+						<button type="button" onClick={handleDone} data-id={item.id}>Done</button>
+					</li>
 				))}
 			</ul>
 		</div>

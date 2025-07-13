@@ -7,6 +7,15 @@ npx create-react-app {project name} --template typescript
 # Reactアプリケーションの立ち上げ
 npm start
 
+# Next.jsプロジェクトの作成
+npx create-next-app@latest
+
+# Next.js Dev Serverの立ち上げ
+npm run dev
+
+# Next.js プロジェクトのビルドとサーバーの起動
+npm run build && npm start
+
 
 ############
 * 親コンポーネントから子コンポーネントにデータを渡す際に使用するpropsという変数は予約語ではなく、Reactの慣習

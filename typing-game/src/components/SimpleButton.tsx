@@ -4,7 +4,8 @@ interface SimpleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement
   children: ReactNode;
   height: number;
   width: number;
-  color?: string;
+  textColor?: string;
+  backgroundColor?: string;
   borderColor?: string;
 };
 
@@ -12,7 +13,8 @@ function SimpleButton({
   children,
   height,
   width,
-  color = "#FFFFFF",
+  textColor = "#000000",
+  backgroundColor = "#FFFFFF",
   borderColor = "#E8EBEE",
   ...props
 }: SimpleButtonProps) {
@@ -21,7 +23,8 @@ function SimpleButton({
   const buttonStyles: React.CSSProperties = {
     height: `${height}px`,
     width: `${width}px`,
-    backgroundColor: color,
+    color: textColor,
+    backgroundColor: backgroundColor,
     borderColor: borderColor,
     fontFamily: "var(--font-inter)",
   };

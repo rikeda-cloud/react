@@ -17,6 +17,7 @@ const loginFields = [
 
 function LoginPage() {
   const handleLogin = (data: any) => console.log("Login Data: ", data);
+  const title = "Login";
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-8 py-12">
@@ -24,10 +25,15 @@ function LoginPage() {
 
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-6xl md:text-8xl font-bold mb-8">
-          Login
+          {title}
         </h1>
         <div>
-          <YupForm fields={loginFields} schema={loginSchema} onSubmit={handleLogin} />
+          <YupForm
+            fields={loginFields}
+            schema={loginSchema}
+            onSubmit={handleLogin}
+            submitButtonText={title}
+          />
         </div>
       </div>
     </div>

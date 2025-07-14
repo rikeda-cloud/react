@@ -17,9 +17,10 @@ interface FormProps {
   schema: yup.AnyObjectSchema;
   onSubmit: (data: any) => void;
   children?: ReactNode;
+  submitButtonText?: string;
 }
 
-function YupForm({ fields, schema, onSubmit, children }: FormProps) {
+function YupForm({ fields, schema, onSubmit, children, submitButtonText = "Send" }: FormProps) {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
@@ -43,12 +44,12 @@ function YupForm({ fields, schema, onSubmit, children }: FormProps) {
         </div>
       ))}
       {children}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-center">
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline w-full"
         >
-          Send
+          {submitButtonText}
         </button>
       </div>
     </form>

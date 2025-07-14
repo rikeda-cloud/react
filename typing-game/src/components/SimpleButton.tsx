@@ -19,6 +19,7 @@ function SimpleButton({
   ...props
 }: SimpleButtonProps) {
   const buttonClasses = "border-2 rounded-lg cursor-pointer";
+  const fontSize = height * 0.4;
 
   const buttonStyles: React.CSSProperties = {
     height: `${height}px`,
@@ -27,6 +28,10 @@ function SimpleButton({
     backgroundColor: backgroundColor,
     borderColor: borderColor,
     fontFamily: "var(--font-inter)",
+    fontSize: `${fontSize}px`,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   };
 
   return (

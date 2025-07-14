@@ -9,6 +9,7 @@ interface FormField {
   name: string;
   label: string;
   type: string;
+  placeholder?: string;
 }
 
 interface FormProps {
@@ -20,7 +21,7 @@ interface FormProps {
 
 function YupForm({ fields, schema, onSubmit, children }: FormProps) {
   const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
   });
   const onError = (err: any) => console.log(err);
 
@@ -32,6 +33,7 @@ function YupForm({ fields, schema, onSubmit, children }: FormProps) {
           <input
             id={field.name}
             type={field.type}
+            placeholder={field.placeholder}
             {...register(field.name)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />

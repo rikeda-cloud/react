@@ -11,8 +11,8 @@ const loginSchema = yup.object({
 });
 
 const loginFields = [
-  { name: "email", label: "Email", type: "email" },
-  { name: "password", label: "Password", type: "password" },
+  { name: "email", label: "Email", type: "email", placeholder: "example@gmail.com" },
+  { name: "password", label: "Password", type: "password", placeholder: "P@ssW0rd" },
 ];
 
 function LoginPage() {

@@ -11,9 +11,9 @@ const signinSchema = yup.object({
 });
 
 const signinFields = [
-  { name: "username", label: "Username", type: "text" },
-  { name: "email", label: "Email", type: "email" },
-  { name: "password", label: "Password", type: "password" },
+  { name: "username", label: "Username", type: "text", placeholder: "rikeda-cloud" },
+  { name: "email", label: "Email", type: "email", placeholder: "example@gmail.com" },
+  { name: "password", label: "Password", type: "password", placeholder: "P@ssW0rd" },
 ];
 
 function SigninPage() {

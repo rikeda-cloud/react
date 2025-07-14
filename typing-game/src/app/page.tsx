@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import SimpleButton from "@/components/SimpleButton";
+import Image from 'next/image';
 
 function Home() {
   const router = useRouter();
@@ -9,8 +10,10 @@ function Home() {
 
   return (
     <main className="flex flex-col items-center justify-between min-h-screen px-8 py-12">
-      <header className="h-1/6 w-full flex items-center justify-start">
-        Logo
+      <header className="h-1/6 w-full flex items-center justify-start relative">
+        <div className="relative w-[150px] h-[40px]">
+          <Image src="/logo.svg" alt="Logo" fill style={{ objectFit: 'contain' }} />
+        </div>
       </header>
 
       <section className="h-3/6 flex items-center justify-center text-center">

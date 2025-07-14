@@ -20,17 +20,16 @@ function SigninPage() {
   const handleSignin = (data: any) => console.log("Signin Data: ", data);
 
   return (
-    <div className="flex flex-col items-center justify-between min-h-screen px-8 py-12">
+    <div className="flex flex-col items-center justify-center min-h-screen px-8 py-12">
       <Header />
 
-      <section className="h-5/6 flex items-center justify-center text-center">
-        <h1 className="text-6xl md:text-8xl font-bold">
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="text-6xl md:text-8xl font-bold mb-8">
           Sign In
         </h1>
-      </section>
-
-      <div>
-        <YupForm fields={signinFields} schema={signinSchema} onSubmit={handleSignin} />
+        <div>
+          <YupForm fields={signinFields} schema={signinSchema} onSubmit={handleSignin} />
+        </div>
       </div>
     </div>
   );

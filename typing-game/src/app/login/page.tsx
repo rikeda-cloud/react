@@ -19,17 +19,16 @@ function LoginPage() {
   const handleLogin = (data: any) => console.log("Login Data: ", data);
 
   return (
-    <div className="flex flex-col items-center justify-between min-h-screen px-8 py-12">
+    <div className="flex flex-col items-center justify-center min-h-screen px-8 py-12">
       <Header />
 
-      <section className="h-5/6 flex items-center justify-center text-center">
-        <h1 className="text-6xl md:text-8xl font-bold">
-          Sign In
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="text-6xl md:text-8xl font-bold mb-8">
+          Login
         </h1>
-      </section>
-
-      <div>
-        <YupForm fields={loginFields} schema={loginSchema} onSubmit={handleLogin} />
+        <div>
+          <YupForm fields={loginFields} schema={loginSchema} onSubmit={handleLogin} />
+        </div>
       </div>
     </div>
   );

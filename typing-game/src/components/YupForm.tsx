@@ -1,3 +1,5 @@
+"use client";
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -17,7 +19,9 @@ interface FormProps {
 }
 
 function YupForm({ fields, schema, onSubmit, children }: FormProps) {
-  const { register, handleSubmit, formState: { errors } } = useForm<any>({ resolver: yupResolver(schema) });
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(schema)
+  });
   const onError = (err: any) => console.log(err);
 
   return (

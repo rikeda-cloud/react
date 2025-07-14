@@ -2,20 +2,19 @@ import Header from '@/components/Header';
 import YupForm from "@/components/YupForm";
 import * as yup from 'yup';
 
-const signinSchema = yup.object({
-  username: yup.string().label("Username").required().min(3),
+
+const loginSchema = yup.object({
   email: yup.string().label("Email").required().email(),
   password: yup.string().label("Password").required().min(6),
 });
 
-const signinFields = [
-  { name: "username", label: "Username", type: "text" },
+const loginFields = [
   { name: "email", label: "Email", type: "email" },
   { name: "password", label: "Password", type: "password" },
 ];
 
-function SigninPage() {
-  const handleSignin = (data: any) => console.log("Signin Data: ", data);
+function LoginPage() {
+  const handleLogin = (data: any) => console.log("Login Data: ", data);
 
   return (
     <div className="flex flex-col items-center justify-between min-h-screen px-8 py-12">
@@ -28,10 +27,10 @@ function SigninPage() {
       </section>
 
       <div>
-        <YupForm fields={signinFields} schema={signinSchema} onSubmit={handleSignin} />
+        <YupForm fields={loginFields} schema={loginSchema} onSubmit={handleLogin} />
       </div>
     </div>
   );
 }
 
-export default SigninPage;
+export default LoginPage;

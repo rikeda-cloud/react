@@ -19,7 +19,7 @@ function HomePageButtons() {
   const buttons: ButtonConfig[] = [
     { label: "Login", path: "/login" },
     { label: "Signin", path: "/signin" },
-    { label: "Play", path: "typing", textColor: "#FFFFFF", backgroundColor: "#2563F0" },
+    { label: "Play", path: "/game", textColor: "#FFFFFF", backgroundColor: "#2563F0" },
   ];
 
   return (

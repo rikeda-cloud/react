@@ -1,21 +1,16 @@
 "use client";
 
 import React from 'react';
-import { useTypingGame } from "@/hooks/useTypingGame";
-import TimeProgressBar from './TimeProgressBar';
+import { useTypingGame } from "./useTypingGame";
+import TimeProgressBar from '../ProgressBar';
 
 function Game() {
-  const { text, romaji, idx, nextQuestion } = useTypingGame();
-
-  const handleTimeUp = () => {
-    console.log("Time is up!");
-    nextQuestion();
-  }
+  const { text, romaji, idx, progress } = useTypingGame();
 
   return (
     <div className="text-center w-full max-w-4xl px-4">
       <div className="mb-8">
-        <TimeProgressBar duration={10} onComplete={handleTimeUp} />
+        <TimeProgressBar progress={progress} />
       </div>
 
       <p className="text-4xl mb-4 font-bold">{text}</p>

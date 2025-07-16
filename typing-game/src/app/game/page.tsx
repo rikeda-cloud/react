@@ -1,6 +1,6 @@
 "use client";
 
-import Game from "@/components/Game";
+import Game from "@/components/game/Game";
 import Header from "@/components/Header";
 
 function GamePage() {

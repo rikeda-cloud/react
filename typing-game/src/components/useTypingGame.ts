@@ -14,6 +14,7 @@ export interface TypingGameResult {
   gameTimeProgress: number;
   questionTimeProgress: number;
   score: number;
+  isGameFinished: boolean;
 }
 
 const getRandomQuestion = () => {
@@ -29,6 +30,7 @@ export const useTypingGame = (): TypingGameResult => {
     = useState(0); // ゲーム全体のタイマー
 
   const [score, setScore] = useState(0);
+  const [isGameFinished, setIsGameFinished] = useState(false);
 
   const nextQuestion = () => { // 次の問題に移る
     setCurrentQuestion(getRandomQuestion());
@@ -41,6 +43,7 @@ export const useTypingGame = (): TypingGameResult => {
   }, []);
 
   useEffect(() => { // キーボードイベントのリスナーを設定
+    if (isGameFinished) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (currentQuestion?.romaji[idx] === e.key) {
         setIdx(prevIdx => prevIdx + 1);
@@ -50,23 +53,26 @@ export const useTypingGame = (): TypingGameResult => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     }
-  }, [currentQuestion, idx]);
+  }, [currentQuestion, idx, isGameFinished]);
 
   useEffect(() => { // idxがcurrentQuestionのromajiの長さに達したら次の問題へ
+    if (isGameFinished) return;
     if (idx === currentQuestion?.romaji.length) {
       setScore(prevScore => prevScore + currentQuestion?.romaji.length);
       nextQuestion();
     }
-  }, [currentQuestion, idx]);
+  }, [currentQuestion, idx, isGameFinished]);
 
   useEffect(() => { // ゲームの制限時間を管理
     const durationInMs = GAME_DURATION_SECONDS * 1000;
-    const decrement = (TIMER_INTERVAL_MS / durationInMs) * 100;
+    const increment = (TIMER_INTERVAL_MS / durationInMs) * 100;
 
     const timer = setInterval(() => {
       setGameTimeProgress((prevProgress) => {
-        const newProgress = prevProgress + decrement;
+        const newProgress = prevProgress + increment;
         if (newProgress >= 100) {
+          setIsGameFinished(true);
+          clearInterval(timer);
           return 100;
         }
         return newProgress;
@@ -74,26 +80,26 @@ export const useTypingGame = (): TypingGameResult => {
     }, TIMER_INTERVAL_MS);
 
     return () => { clearInterval(timer); }
-  }, [gameTimeProgress]);
+  }, []);
 
   useEffect(() => { // 1問の制限時間を管理
+    if (isGameFinished) return;
     const durationInMs = QUESTION_DURATION_SECONDS * 1000;
-    const decrement = (TIMER_INTERVAL_MS / durationInMs) * 100;
+    const increment = (TIMER_INTERVAL_MS / durationInMs) * 100;
 
     const timer = setInterval(() => {
       setQuestionTimeProgress((prevProgress) => {
-        const newProgress = prevProgress + decrement;
+        const newProgress = prevProgress + increment;
         if (newProgress >= 100) {
-          clearInterval(timer);
           nextQuestion();
-          return 100;
+          return 0;
         }
         return newProgress;
       });
     }, TIMER_INTERVAL_MS);
 
     return () => { clearInterval(timer); }
-  }, [questionTimeProgress]);
+  }, [currentQuestion, isGameFinished]);
 
   return {
     question: currentQuestion?.text || "",
@@ -102,5 +108,6 @@ export const useTypingGame = (): TypingGameResult => {
     questionTimeProgress: questionTimeProgress,
     gameTimeProgress: gameTimeProgress,
     score: score,
+    isGameFinished: isGameFinished,
   };
 }

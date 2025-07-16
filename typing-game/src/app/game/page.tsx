@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import ProgressBar from '@/components/ProgressBar';
 
 function GamePage() {
-  const { text, romaji, idx, questionTimeProgress, gameTimeProgress }
+  const { question, romaji, idx, questionTimeProgress, gameTimeProgress, score }
     = useTypingGame();
 
   return (
@@ -19,11 +19,13 @@ function GamePage() {
           <ProgressBar progress={gameTimeProgress} />
         </div>
 
+        <p>Score: {score}</p>
+
         <div className="mb-8">
           <ProgressBar progress={questionTimeProgress} />
         </div>
 
-        <p className="text-4xl mb-4 font-bold">{text}</p>
+        <p className="text-4xl mb-4 font-bold">{question}</p>
         <p className="text-2xl font-mono">
           <span style={{ color: "#BAC521" }}>{romaji?.slice(0, idx)}</span>
           <span className="text-gray-500">{romaji?.slice(idx)}</span>

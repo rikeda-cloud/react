@@ -1,24 +1,39 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { typingQuestions, TypingQuestion } from "@/data/typingData";
+
+const GAME_DURATION_SECONDS = 30; // ゲーム全体の制限時間
+const QUESTION_DURATION_SECONDS = 5; // 1問の制限時間
+const TIMER_INTERVAL_MS = 100; // タイマーの更新間隔
+
+export interface TypingGameResult {
+  question: string;
+  romaji: string;
+  idx: number;
+  gameTimeProgress: number;
+  questionTimeProgress: number;
+  score: number;
+}
 
 const getRandomQuestion = () => {
   return typingQuestions[Math.floor(Math.random() * typingQuestions.length)];
 }
 
-export const useTypingGame = () => {
-  const router = useRouter();
+export const useTypingGame = (): TypingGameResult => {
   const [currentQuestion, setCurrentQuestion] = useState<TypingQuestion | null>(null);
   const [idx, setIdx] = useState(0);
-  const [questionTimeProgress, setProgress] = useState(0); // 1問のタイマー
-  const [gameTimeProgress, setGameLimit] = useState(0); // ゲーム全体のタイマー
+  const [questionTimeProgress, setQuestionTimeProgress]
+    = useState(0); // 1問のタイマー
+  const [gameTimeProgress, setGameTimeProgress]
+    = useState(0); // ゲーム全体のタイマー
+
+  const [score, setScore] = useState(0);
 
   const nextQuestion = () => { // 次の問題に移る
     setCurrentQuestion(getRandomQuestion());
     setIdx(0);
-    setProgress(0);
+    setQuestionTimeProgress(0);
   }
 
   useEffect(() => { // 初回のみ、クライアント側で値をセット
@@ -39,55 +54,53 @@ export const useTypingGame = () => {
 
   useEffect(() => { // idxがcurrentQuestionのromajiの長さに達したら次の問題へ
     if (idx === currentQuestion?.romaji.length) {
+      setScore(prevScore => prevScore + currentQuestion?.romaji.length);
       nextQuestion();
     }
   }, [currentQuestion, idx]);
 
-  useEffect(() => {
-    const duration = 30; // タイピングの制限時間（秒）
-    const durationInMs = duration * 1000; // タイピングの制限時間をミリ秒に変換
-    const intervalTime = 100; // タイマーの更新間隔（100ミリ秒）
-    const decrement = (intervalTime / durationInMs) * 100; // 進捗バーの減少量
+  useEffect(() => { // ゲームの制限時間を管理
+    const durationInMs = GAME_DURATION_SECONDS * 1000;
+    const decrement = (TIMER_INTERVAL_MS / durationInMs) * 100;
 
     const timer = setInterval(() => {
-      setGameLimit((prevProgress) => {
+      setGameTimeProgress((prevProgress) => {
         const newProgress = prevProgress + decrement;
         if (newProgress >= 100) {
-          router.push("/"); // ゲーム終了時に結果ページへ遷移
+          return 100;
         }
-        return newProgress; // 進捗を更新
+        return newProgress;
       });
-    }, intervalTime);
+    }, TIMER_INTERVAL_MS);
 
     return () => { clearInterval(timer); }
-  }, [questionTimeProgress]);
+  }, [gameTimeProgress]);
 
   useEffect(() => { // 1問の制限時間を管理
-    const duration = 5; // タイピングの制限時間（秒）
-    const durationInMs = duration * 1000; // タイピングの制限時間をミリ秒に変換
-    const intervalTime = 100; // タイマーの更新間隔（100ミリ秒）
-    const decrement = (intervalTime / durationInMs) * 100; // 進捗バーの減少量
+    const durationInMs = QUESTION_DURATION_SECONDS * 1000;
+    const decrement = (TIMER_INTERVAL_MS / durationInMs) * 100;
 
     const timer = setInterval(() => {
-      setProgress((prevProgress) => {
+      setQuestionTimeProgress((prevProgress) => {
         const newProgress = prevProgress + decrement;
         if (newProgress >= 100) {
           clearInterval(timer);
           nextQuestion();
-          return 100; // 進捗が100%を超えないようにする
+          return 100;
         }
-        return newProgress; // 進捗を更新
+        return newProgress;
       });
-    }, intervalTime);
+    }, TIMER_INTERVAL_MS);
 
     return () => { clearInterval(timer); }
   }, [questionTimeProgress]);
 
   return {
-    text: currentQuestion?.text,
-    romaji: currentQuestion?.romaji,
+    question: currentQuestion?.text || "",
+    romaji: currentQuestion?.romaji || "",
     idx: idx,
     questionTimeProgress: questionTimeProgress,
     gameTimeProgress: gameTimeProgress,
+    score: score,
   };
 }

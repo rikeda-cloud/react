@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { typingQuestions, TypingQuestion } from "@/data/typingData";
 
@@ -6,14 +8,16 @@ const getRandomQuestion = () => {
 }
 
 export const useTypingGame = () => {
-  const [currentQuestion, setCurrentQuestion] = useState<TypingQuestion>(() => {
-    return getRandomQuestion();
-  });
+  const [currentQuestion, setCurrentQuestion] = useState<TypingQuestion | null>(null);
   const [idx, setIdx] = useState(0);
 
   useEffect(() => {
+    setCurrentQuestion(getRandomQuestion());
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (currentQuestion.romaji[idx] === e.key) {
+      if (currentQuestion?.romaji[idx] === e.key) {
         setIdx(prevIdx => prevIdx + 1);
       }
     };
@@ -29,14 +33,14 @@ export const useTypingGame = () => {
       setIdx(0);
     }
 
-    if (idx === currentQuestion.romaji.length) {
+    if (idx === currentQuestion?.romaji.length) {
       nextQuestion();
     }
   }, [currentQuestion, idx]);
 
   return {
-    text: currentQuestion.text,
-    romaji: currentQuestion.romaji,
+    text: currentQuestion?.text,
+    romaji: currentQuestion?.romaji,
     idx: idx,
   };
 }

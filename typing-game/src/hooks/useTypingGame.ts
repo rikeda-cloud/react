@@ -27,12 +27,12 @@ export const useTypingGame = () => {
     }
   }, [currentQuestion, idx]);
 
-  useEffect(() => {
-    const nextQuestion = () => {
-      setCurrentQuestion(getRandomQuestion());
-      setIdx(0);
-    }
+  const nextQuestion = () => {
+    setCurrentQuestion(getRandomQuestion());
+    setIdx(0);
+  }
 
+  useEffect(() => {
     if (idx === currentQuestion?.romaji.length) {
       nextQuestion();
     }
@@ -42,5 +42,6 @@ export const useTypingGame = () => {
     text: currentQuestion?.text,
     romaji: currentQuestion?.romaji,
     idx: idx,
+    nextQuestion: nextQuestion,
   };
 }

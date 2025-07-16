@@ -8,13 +8,13 @@ function Game() {
 
   return (
     <div className="text-center">
-      <p className="text-2xl mb-2 font-bold">{text}</p>
-      <p className="text-lg font-mono">
+      <p className="text-4xl mb-4 font-bold">{text}</p>
+      <p className="text-2xl font-mono">
         <span style={{ color: "#BAC521" }}>
-          {romaji.slice(0, idx)}
+          {romaji?.slice(0, idx)}
         </span>
         <span className="text-gray-500">
-          {romaji.slice(idx, romaji.length)}
+          {romaji?.slice(idx)}
         </span>
       </p>
     </div>

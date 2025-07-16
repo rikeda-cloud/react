@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { typingQuestions, TypingQuestion } from "@/data/typingData";
 
 const getRandomQuestion = () => {
@@ -8,9 +9,11 @@ const getRandomQuestion = () => {
 }
 
 export const useTypingGame = () => {
+  const router = useRouter();
   const [currentQuestion, setCurrentQuestion] = useState<TypingQuestion | null>(null);
   const [idx, setIdx] = useState(0);
-  const [progress, setProgress] = useState(0);
+  const [questionTimeProgress, setProgress] = useState(0); // 1問のタイマー
+  const [gameTimeProgress, setGameLimit] = useState(0); // ゲーム全体のタイマー
 
   const nextQuestion = () => { // 次の問題に移る
     setCurrentQuestion(getRandomQuestion());
@@ -41,7 +44,26 @@ export const useTypingGame = () => {
   }, [currentQuestion, idx]);
 
   useEffect(() => {
-    const duration = 10; // タイピングの制限時間（秒）
+    const duration = 30; // タイピングの制限時間（秒）
+    const durationInMs = duration * 1000; // タイピングの制限時間をミリ秒に変換
+    const intervalTime = 100; // タイマーの更新間隔（100ミリ秒）
+    const decrement = (intervalTime / durationInMs) * 100; // 進捗バーの減少量
+
+    const timer = setInterval(() => {
+      setGameLimit((prevProgress) => {
+        const newProgress = prevProgress + decrement;
+        if (newProgress >= 100) {
+          router.push("/"); // ゲーム終了時に結果ページへ遷移
+        }
+        return newProgress; // 進捗を更新
+      });
+    }, intervalTime);
+
+    return () => { clearInterval(timer); }
+  }, [questionTimeProgress]);
+
+  useEffect(() => { // 1問の制限時間を管理
+    const duration = 5; // タイピングの制限時間（秒）
     const durationInMs = duration * 1000; // タイピングの制限時間をミリ秒に変換
     const intervalTime = 100; // タイマーの更新間隔（100ミリ秒）
     const decrement = (intervalTime / durationInMs) * 100; // 進捗バーの減少量
@@ -59,12 +81,13 @@ export const useTypingGame = () => {
     }, intervalTime);
 
     return () => { clearInterval(timer); }
-  }, [progress]);
+  }, [questionTimeProgress]);
 
   return {
     text: currentQuestion?.text,
     romaji: currentQuestion?.romaji,
     idx: idx,
-    progress: progress,
+    questionTimeProgress: questionTimeProgress,
+    gameTimeProgress: gameTimeProgress,
   };
 }

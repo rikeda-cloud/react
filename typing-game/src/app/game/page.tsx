@@ -6,15 +6,21 @@ import Header from "@/components/Header";
 import ProgressBar from '@/components/ProgressBar';
 
 function GamePage() {
-  const { text, romaji, idx, progress } = useTypingGame();
+  const { text, romaji, idx, questionTimeProgress, gameTimeProgress }
+    = useTypingGame();
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen">
       <Header />
 
+
       <div className="text-center w-full max-w-4xl px-4">
         <div className="mb-8">
-          <ProgressBar progress={progress} />
+          <ProgressBar progress={gameTimeProgress} />
+        </div>
+
+        <div className="mb-8">
+          <ProgressBar progress={questionTimeProgress} />
         </div>
 
         <p className="text-4xl mb-4 font-bold">{text}</p>

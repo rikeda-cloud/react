@@ -51,6 +51,7 @@ export const useTypingGame = () => {
         const newProgress = prevProgress + decrement;
         if (newProgress >= 100) {
           clearInterval(timer);
+          nextQuestion();
           return 100; // 進捗が100%を超えないようにする
         }
         return newProgress; // 進捗を更新

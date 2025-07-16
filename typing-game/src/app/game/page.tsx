@@ -19,7 +19,10 @@ function GamePage() {
           <ProgressBar progress={gameTimeProgress} />
         </div>
 
-        <p>Score: {score}</p>
+        <p className="text-2xl font-bold text-gray-400 mb-4">
+          score:
+          <span className="text-yellow-400">{score}</span>
+        </p>
 
         <div className="mb-8">
           <ProgressBar progress={questionTimeProgress} />

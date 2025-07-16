@@ -13,7 +13,6 @@ function GamePage() {
     <div className="relative flex flex-col items-center justify-center min-h-screen">
       <Header />
 
-
       <div className="text-center w-full max-w-4xl px-4">
         <div className="mb-8">
           <ProgressBar progress={gameTimeProgress} />
@@ -25,7 +24,7 @@ function GamePage() {
         </p>
 
         <div className="mb-8">
-          <ProgressBar progress={questionTimeProgress} />
+          <ProgressBar progress={questionTimeProgress} color="#00FFFF" />
         </div>
 
         <p className="text-4xl mb-4 font-bold">{question}</p>

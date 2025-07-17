@@ -1,9 +1,8 @@
 "use client";
 
-import Header from '@/components/Header';
+import Header from "@/components/Header";
 import YupForm from "@/components/YupForm";
-import * as yup from 'yup';
-
+import * as yup from "yup";
 
 const loginSchema = yup.object({
   email: yup.string().label("Email").required().email(),
@@ -11,8 +10,18 @@ const loginSchema = yup.object({
 });
 
 const loginFields = [
-  { name: "email", label: "Email", type: "email", placeholder: "example@gmail.com" },
-  { name: "password", label: "Password", type: "password", placeholder: "P@ssW0rd" },
+  {
+    name: "email",
+    label: "Email",
+    type: "email",
+    placeholder: "example@gmail.com",
+  },
+  {
+    name: "password",
+    label: "Password",
+    type: "password",
+    placeholder: "P@ssW0rd",
+  },
 ];
 
 function LoginPage() {
@@ -24,9 +33,7 @@ function LoginPage() {
       <Header />
 
       <div className="flex flex-col items-center justify-center">
-        <h1 className="text-6xl md:text-8xl font-bold mb-8">
-          {title}
-        </h1>
+        <h1 className="text-6xl md:text-8xl font-bold mb-8">{title}</h1>
         <div>
           <YupForm
             fields={loginFields}

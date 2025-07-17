@@ -2,13 +2,14 @@
 
 import React, { ReactNode, useState } from "react";
 
-interface SimpleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface SimpleButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   height: number;
   width: number;
   textColor?: string;
   backgroundColor?: string;
-};
+}
 
 function SimpleButton({
   children,

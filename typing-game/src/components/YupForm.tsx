@@ -20,17 +20,36 @@ interface FormProps {
   submitButtonText?: string;
 }
 
-function YupForm({ fields, schema, onSubmit, children, submitButtonText = "Send" }: FormProps) {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+function YupForm({
+  fields,
+  schema,
+  onSubmit,
+  children,
+  submitButtonText = "Send",
+}: FormProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
   });
   const onError = (err: unknown) => console.log(err);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit, onError)} noValidate className="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg">
+    <form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      noValidate
+      className="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg"
+    >
       {fields.map((field) => (
         <div key={field.name} className="mb-4">
-          <label htmlFor={field.name} className="block text-gray-700 text-sm font-bold mb-2">{field.label}</label>
+          <label
+            htmlFor={field.name}
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            {field.label}
+          </label>
           <input
             id={field.name}
             type={field.type}
@@ -39,7 +58,9 @@ function YupForm({ fields, schema, onSubmit, children, submitButtonText = "Send"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
           {errors[field.name] && (
-            <div className="text-red-500 text-xs italic mt-1">{errors[field.name]?.message as ReactNode}</div>
+            <div className="text-red-500 text-xs italic mt-1">
+              {errors[field.name]?.message as ReactNode}
+            </div>
           )}
         </div>
       ))}
@@ -53,7 +74,7 @@ function YupForm({ fields, schema, onSubmit, children, submitButtonText = "Send"
         </button>
       </div>
     </form>
-  )
+  );
 }
 
 export default YupForm;

@@ -1,6 +1,6 @@
 "use client";
-import { useSearchParams } from 'next/navigation';
-import SimpleButton from '@/components/SimpleButton';
+import { useSearchParams } from "next/navigation";
+import SimpleButton from "@/components/SimpleButton";
 import { useRouter } from "next/navigation";
 
 function GameResult() {
@@ -16,10 +16,22 @@ function GameResult() {
         <p className="text-7xl font-bold text-yellow-400">{score}</p>
       </div>
       <div className="flex justify-center gap-4 mt-8">
-        <SimpleButton height={100} width={300} textColor="#FFFFFF" backgroundColor="#4A90E2" onClick={() => router.push("/game")}>
+        <SimpleButton
+          height={100}
+          width={300}
+          textColor="#FFFFFF"
+          backgroundColor="#4A90E2"
+          onClick={() => router.push("/game")}
+        >
           Play Again
         </SimpleButton>
-        <SimpleButton height={100} width={300} textColor="#FFFFFF" backgroundColor="#4A90E2" onClick={() => router.push("/")}>
+        <SimpleButton
+          height={100}
+          width={300}
+          textColor="#FFFFFF"
+          backgroundColor="#4A90E2"
+          onClick={() => router.push("/")}
+        >
           Back to Home
         </SimpleButton>
       </div>

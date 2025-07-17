@@ -19,10 +19,12 @@ export interface TypingGameResult {
 
 const getRandomQuestion = () => {
   return typingQuestions[Math.floor(Math.random() * typingQuestions.length)];
-}
+};
 
 export const useTypingGame = (): TypingGameResult => {
-  const [currentQuestion, setCurrentQuestion] = useState<TypingQuestion | null>(null);
+  const [currentQuestion, setCurrentQuestion] = useState<TypingQuestion | null>(
+    null,
+  );
   const [idx, setIdx] = useState(0);
   const [questionTimeProgress, setQuestionTimeProgress] = useState(0); // 1問のタイマー
   const [gameTimeProgress, setGameTimeProgress] = useState(0); // ゲーム全体のタイマー
@@ -31,20 +33,23 @@ export const useTypingGame = (): TypingGameResult => {
   const [score, setScore] = useState(0);
   const [isGameFinished, setIsGameFinished] = useState(false);
 
-  const nextQuestion = () => { // 次の問題に移る
+  const nextQuestion = () => {
+    // 次の問題に移る
     setCurrentQuestion(getRandomQuestion());
     setIdx(0);
     setQuestionTimeProgress(0);
-  }
+  };
 
-  const handleKeyDown = (e: KeyboardEvent) => { // キーボードのキーが押されたときの処理
+  const handleKeyDown = (e: KeyboardEvent) => {
+    // キーボードのキーが押されたときの処理
     if (currentQuestion?.romaji[idx] === e.key) {
-      setIdx(prevIdx => prevIdx + 1);
+      setIdx((prevIdx) => prevIdx + 1);
     }
   };
 
   useEffect(() => {
-    if (!oneShotFlag.current) { // 初回のみ、クライアント側で値をセット
+    if (!oneShotFlag.current) {
+      // 初回のみ、クライアント側で値をセット
       setCurrentQuestion(getRandomQuestion());
       oneShotFlag.current = true;
     }
@@ -53,17 +58,19 @@ export const useTypingGame = (): TypingGameResult => {
 
     window.addEventListener("keydown", handleKeyDown); // キーボードイベントのリスナーを設定
 
-    if (idx === currentQuestion?.romaji.length) { // idxがromajiの長さに達したら次の問題へ
-      setScore(prevScore => prevScore + currentQuestion?.romaji.length);
+    if (idx === currentQuestion?.romaji.length) {
+      // idxがromajiの長さに達したら次の問題へ
+      setScore((prevScore) => prevScore + currentQuestion?.romaji.length);
       nextQuestion();
     }
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-    }
+    };
   }, [currentQuestion, idx]);
 
-  useEffect(() => { // ゲームの制限時間を管理
+  useEffect(() => {
+    // ゲームの制限時間を管理
     const durationInMs = GAME_DURATION_SECONDS * 1000;
     const increment = (TIMER_INTERVAL_MS / durationInMs) * 100;
 
@@ -79,10 +86,13 @@ export const useTypingGame = (): TypingGameResult => {
       });
     }, TIMER_INTERVAL_MS);
 
-    return () => { clearInterval(timer); }
+    return () => {
+      clearInterval(timer);
+    };
   }, []);
 
-  useEffect(() => { // 1問の制限時間を管理
+  useEffect(() => {
+    // 1問の制限時間を管理
     if (isGameFinished) return;
     const durationInMs = QUESTION_DURATION_SECONDS * 1000;
     const increment = (TIMER_INTERVAL_MS / durationInMs) * 100;
@@ -98,7 +108,9 @@ export const useTypingGame = (): TypingGameResult => {
       });
     }, TIMER_INTERVAL_MS);
 
-    return () => { clearInterval(timer); }
+    return () => {
+      clearInterval(timer);
+    };
   }, [currentQuestion]);
 
   return {
@@ -110,4 +122,4 @@ export const useTypingGame = (): TypingGameResult => {
     score: score,
     isGameFinished: isGameFinished,
   };
-}
+};

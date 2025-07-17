@@ -1,8 +1,8 @@
 "use client";
 
-import Header from '@/components/Header';
+import Header from "@/components/Header";
 import YupForm from "@/components/YupForm";
-import * as yup from 'yup';
+import * as yup from "yup";
 
 const signinSchema = yup.object({
   username: yup.string().label("Username").required().min(3),
@@ -11,9 +11,24 @@ const signinSchema = yup.object({
 });
 
 const signinFields = [
-  { name: "username", label: "Username", type: "text", placeholder: "rikeda-cloud" },
-  { name: "email", label: "Email", type: "email", placeholder: "example@gmail.com" },
-  { name: "password", label: "Password", type: "password", placeholder: "P@ssW0rd" },
+  {
+    name: "username",
+    label: "Username",
+    type: "text",
+    placeholder: "rikeda-cloud",
+  },
+  {
+    name: "email",
+    label: "Email",
+    type: "email",
+    placeholder: "example@gmail.com",
+  },
+  {
+    name: "password",
+    label: "Password",
+    type: "password",
+    placeholder: "P@ssW0rd",
+  },
 ];
 
 function SigninPage() {
@@ -25,9 +40,7 @@ function SigninPage() {
       <Header />
 
       <div className="flex flex-col items-center justify-center">
-        <h1 className="text-6xl md:text-8xl font-bold mb-8">
-          {title}
-        </h1>
+        <h1 className="text-6xl md:text-8xl font-bold mb-8">{title}</h1>
         <div>
           <YupForm
             fields={signinFields}

@@ -10,13 +10,21 @@ function GameResult() {
 
   return (
     <div className="text-center w-full max-w-4xl px-4">
-      <h1 className="text-4xl font-bold mb-8">Result</h1>
-      <p className="text-2xl font-bold text-white mb-4">
-        Your Score: <span className="text-yellow-400">{score}</span>
-      </p>
-      <SimpleButton height={50} width={100} onClick={() => router.push("/game")}>
-        Play Again
-      </SimpleButton>
+      <h1 className="text-5xl font-bold mb-6 text-white">Game Result</h1>
+      <div className="bg-gray-800 bg-opacity-50 rounded-lg p-8 shadow-lg w-full max-w-md mx-auto">
+        <p className="text-2xl text-gray-300 mb-4">Your Score</p>
+        <p className="text-7xl font-bold text-yellow-400">{score}</p>
+      </div>
+      <div className="flex justify-center gap-4 mt-8">
+        <SimpleButton height={100} width={300} textColor="#FFFFFF" backgroundColor="#4A90E2"
+          borderColor="#FFFFFF" onClick={() => router.push("/game")}>
+          Play Again
+        </SimpleButton>
+        <SimpleButton height={100} width={300} textColor="#FFFFFF" backgroundColor="#4A90E2"
+          borderColor="#FFFFFF" onClick={() => router.push("/")}>
+          Back to Home
+        </SimpleButton>
+      </div>
     </div>
   );
 }

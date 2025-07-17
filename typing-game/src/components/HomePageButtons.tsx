@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import SimpleButton from "./SimpleButton";
-import React from "react";
 
 interface ButtonConfig {
   label: string;

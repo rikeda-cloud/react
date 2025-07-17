@@ -1,6 +1,7 @@
 "use client";
 
-import React, { ReactNode, useState } from "react";
+import type React from "react";
+import { type ReactNode, useState } from "react";
 
 interface SimpleButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

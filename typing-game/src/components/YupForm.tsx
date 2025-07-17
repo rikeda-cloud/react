@@ -2,8 +2,8 @@
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { ReactNode } from "react";
+import type * as yup from "yup";
+import type { ReactNode } from "react";
 
 interface FormField {
   name: string;

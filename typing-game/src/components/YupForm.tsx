@@ -15,7 +15,7 @@ interface FormField {
 interface FormProps {
   fields: FormField[];
   schema: yup.AnyObjectSchema;
-  onSubmit: (data: any) => void;
+  onSubmit: (data: unknown) => void;
   children?: ReactNode;
   submitButtonText?: string;
 }
@@ -24,7 +24,7 @@ function YupForm({ fields, schema, onSubmit, children, submitButtonText = "Send"
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
-  const onError = (err: any) => console.log(err);
+  const onError = (err: unknown) => console.log(err);
 
   return (
     <form onSubmit={handleSubmit(onSubmit, onError)} noValidate className="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg">

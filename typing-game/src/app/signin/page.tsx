@@ -17,7 +17,7 @@ const signinFields = [
 ];
 
 function SigninPage() {
-  const handleSignin = (data: any) => console.log("Signin Data: ", data);
+  const handleSignin = (data: unknown) => console.log("Signin Data: ", data);
   const title = "Sign In";
 
   return (

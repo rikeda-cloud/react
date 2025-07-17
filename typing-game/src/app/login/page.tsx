@@ -16,7 +16,7 @@ const loginFields = [
 ];
 
 function LoginPage() {
-  const handleLogin = (data: any) => console.log("Login Data: ", data);
+  const handleLogin = (data: unknown) => console.log("Login Data: ", data);
   const title = "Login";
 
   return (

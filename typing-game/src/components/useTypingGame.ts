@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { typingQuestions, TypingQuestion } from "@/data/typingData";
 
 const GAME_DURATION_SECONDS = 30; // ゲーム全体の制限時間
@@ -24,10 +24,9 @@ const getRandomQuestion = () => {
 export const useTypingGame = (): TypingGameResult => {
   const [currentQuestion, setCurrentQuestion] = useState<TypingQuestion | null>(null);
   const [idx, setIdx] = useState(0);
-  const [questionTimeProgress, setQuestionTimeProgress]
-    = useState(0); // 1問のタイマー
-  const [gameTimeProgress, setGameTimeProgress]
-    = useState(0); // ゲーム全体のタイマー
+  const [questionTimeProgress, setQuestionTimeProgress] = useState(0); // 1問のタイマー
+  const [gameTimeProgress, setGameTimeProgress] = useState(0); // ゲーム全体のタイマー
+  const oneShotFlag = useRef(false);
 
   const [score, setScore] = useState(0);
   const [isGameFinished, setIsGameFinished] = useState(false);
@@ -38,30 +37,31 @@ export const useTypingGame = (): TypingGameResult => {
     setQuestionTimeProgress(0);
   }
 
-  useEffect(() => { // 初回のみ、クライアント側で値をセット
-    setCurrentQuestion(getRandomQuestion());
-  }, []);
-
-  useEffect(() => { // キーボードイベントのリスナーを設定
-    if (isGameFinished) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (currentQuestion?.romaji[idx] === e.key) {
-        setIdx(prevIdx => prevIdx + 1);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+  const handleKeyDown = (e: KeyboardEvent) => { // キーボードのキーが押されたときの処理
+    if (currentQuestion?.romaji[idx] === e.key) {
+      setIdx(prevIdx => prevIdx + 1);
     }
-  }, [currentQuestion, idx, isGameFinished]);
+  };
 
-  useEffect(() => { // idxがcurrentQuestionのromajiの長さに達したら次の問題へ
-    if (isGameFinished) return;
-    if (idx === currentQuestion?.romaji.length) {
+  useEffect(() => {
+    if (!oneShotFlag.current) { // 初回のみ、クライアント側で値をセット
+      setCurrentQuestion(getRandomQuestion());
+      oneShotFlag.current = true;
+    }
+
+    if (isGameFinished) return; // ゲームが終了している場合は何もしない
+
+    window.addEventListener("keydown", handleKeyDown); // キーボードイベントのリスナーを設定
+
+    if (idx === currentQuestion?.romaji.length) { // idxがromajiの長さに達したら次の問題へ
       setScore(prevScore => prevScore + currentQuestion?.romaji.length);
       nextQuestion();
     }
-  }, [currentQuestion, idx, isGameFinished]);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    }
+  }, [currentQuestion, idx]);
 
   useEffect(() => { // ゲームの制限時間を管理
     const durationInMs = GAME_DURATION_SECONDS * 1000;
@@ -99,7 +99,7 @@ export const useTypingGame = (): TypingGameResult => {
     }, TIMER_INTERVAL_MS);
 
     return () => { clearInterval(timer); }
-  }, [currentQuestion, isGameFinished]);
+  }, [currentQuestion]);
 
   return {
     question: currentQuestion?.text || "",

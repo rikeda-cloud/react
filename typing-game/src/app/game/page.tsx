@@ -13,7 +13,7 @@ function GamePage() {
 
   useEffect(() => {
     if (isGameFinished) {
-      router.push(`/result?score=${score}`);
+      router.push(`/game/result?score=${score}`);
     }
   }, [isGameFinished, router, score]);
 

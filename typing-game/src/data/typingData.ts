@@ -90,7 +90,7 @@ export const typingQuestions: TypingQuestion[] = [
   },
   {
     text: "ローマは一日にして成らず",
-    romaji: "ro-mahaitinitininisitenarazu"
+    romaji: "ro-mahaitinitinisitenarazu"
   },
   {
     text: "ペンは剣よりも強し",

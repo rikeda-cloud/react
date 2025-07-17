@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useTypingGame } from "@/components/useTypingGame";
+import { useEffect } from "react";
 import Header from "@/components/Header";
 import ProgressBar from "@/components/ProgressBar";
+import { useTypingGame } from "@/components/useTypingGame";
 
 function GamePage() {
   const router = useRouter();

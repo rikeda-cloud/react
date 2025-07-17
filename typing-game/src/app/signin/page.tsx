@@ -1,8 +1,8 @@
 "use client";
 
+import * as yup from "yup";
 import Header from "@/components/Header";
 import YupForm from "@/components/YupForm";
-import * as yup from "yup";
 
 const signinSchema = yup.object({
   username: yup.string().label("Username").required().min(3),

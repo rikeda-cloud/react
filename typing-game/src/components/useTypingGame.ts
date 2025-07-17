@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { typingQuestions, type TypingQuestion } from "@/data/typingData";
+import { useCallback, useEffect, useState } from "react";
+import { type TypingQuestion, typingQuestions } from "@/data/typingData";
 
 const GAME_DURATION_SECONDS = 30; // ゲーム全体の制限時間
 const QUESTION_DURATION_SECONDS = 5; // 1問の制限時間
@@ -49,7 +49,8 @@ export const useTypingGame = (): TypingGameResult => {
     [currentQuestion, idx],
   );
 
-  useEffect(() => { // 初回のみ、クライアント側で値をセット
+  useEffect(() => {
+    // 初回のみ、クライアント側で値をセット
     setCurrentQuestion(getRandomQuestion());
   }, []);
 

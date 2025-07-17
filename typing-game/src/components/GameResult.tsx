@@ -1,7 +1,7 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+
+import { useRouter, useSearchParams } from "next/navigation";
 import SimpleButton from "@/components/SimpleButton";
-import { useRouter } from "next/navigation";
 
 function GameResult() {
   const searchParams = useSearchParams();

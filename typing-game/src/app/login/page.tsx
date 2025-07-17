@@ -1,8 +1,8 @@
 "use client";
 
+import * as yup from "yup";
 import Header from "@/components/Header";
 import YupForm from "@/components/YupForm";
-import * as yup from "yup";
 
 const loginSchema = yup.object({
   email: yup.string().label("Email").required().email(),

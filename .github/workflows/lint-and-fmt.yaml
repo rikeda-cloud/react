@@ -1,0 +1,17 @@
+name: Lint and Format Check
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint-and-fmt:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run lint and format check
+        run: cd typing-game && make check

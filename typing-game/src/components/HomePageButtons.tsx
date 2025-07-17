@@ -9,7 +9,6 @@ interface ButtonConfig {
   path: string;
   textColor?: string;
   backgroundColor?: string;
-  borderColor?: string;
 };
 
 function HomePageButtons() {
@@ -27,7 +26,7 @@ function HomePageButtons() {
       {buttons.map((btn) => (
         <SimpleButton
           key={btn.label} height={btnSize.h} width={btnSize.w}
-          textColor={btn.textColor} backgroundColor={btn.backgroundColor} borderColor={btn.borderColor}
+          textColor={btn.textColor} backgroundColor={btn.backgroundColor}
           onClick={() => router.push(btn.path)}>
           {btn.label}
         </SimpleButton>

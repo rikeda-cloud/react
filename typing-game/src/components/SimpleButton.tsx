@@ -8,7 +8,6 @@ interface SimpleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement
   width: number;
   textColor?: string;
   backgroundColor?: string;
-  borderColor?: string;
 };
 
 function SimpleButton({
@@ -17,7 +16,6 @@ function SimpleButton({
   width,
   textColor = "#000000",
   backgroundColor = "#FFFFFF",
-  borderColor = "#E8EBEE",
   ...props
 }: SimpleButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
@@ -25,9 +23,10 @@ function SimpleButton({
   const buttonClasses = "border-2 rounded-lg cursor-pointer";
   const fontSize = height * 0.4;
 
+  // WARN エッジの色は文字の色を使用する
   const currentTextColor = isHovered ? backgroundColor : textColor;
-  const currentBackgroundColor = isHovered ? borderColor : backgroundColor;
-  const currentBorderColor = isHovered ? backgroundColor : borderColor;
+  const currentBackgroundColor = isHovered ? textColor : backgroundColor;
+  const currentBorderColor = isHovered ? backgroundColor : textColor;
 
   const buttonStyles: React.CSSProperties = {
     height: `${height}px`,

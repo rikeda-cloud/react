@@ -1,9 +1,9 @@
 "use client";
 
+import { Button, ButtonGroup } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLanguage } from "@/store/languageSlice";
 import type { RootState } from "@/store/store";
-import { Button, ButtonGroup } from "@chakra-ui/react";
 
 function ChakraLanguageSwitcher() {
   const dispatch = useDispatch();

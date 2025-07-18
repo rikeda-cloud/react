@@ -1,10 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import ChakraLanguageSwitcher from "./ChakraLanguageSwitcher";
-import ChakraButton from "./ChakraButton";
 import { HStack, VStack } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 import { RiLoginBoxLine, RiPlayLine, RiUserAddLine } from "react-icons/ri";
+import ChakraButton from "./ChakraButton";
+import ChakraLanguageSwitcher from "./ChakraLanguageSwitcher";
 
 function HomePageButtons() {
   const router = useRouter();
@@ -13,14 +13,17 @@ function HomePageButtons() {
     <VStack spacing={8}>
       <ChakraLanguageSwitcher />
       <ChakraButton size="lg" onClick={() => router.push("/game")}>
-        Play<RiPlayLine />
+        Play
+        <RiPlayLine />
       </ChakraButton>
       <HStack spacing={4}>
         <ChakraButton size="lg" onClick={() => router.push("/login")}>
-          <RiLoginBoxLine />Login
+          <RiLoginBoxLine />
+          Login
         </ChakraButton>
         <ChakraButton size="lg" onClick={() => router.push("/signin")}>
-          <RiUserAddLine />Signin
+          <RiUserAddLine />
+          Signin
         </ChakraButton>
       </HStack>
     </VStack>

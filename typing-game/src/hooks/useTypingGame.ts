@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { type TypingQuestion, typingQuestions } from "@/data/typingData";
+import { typingQuestions } from "@/data/TypingQuestions";
+import { type TypingQuestion } from "@/data/TypingQuestion";
 
 const GAME_DURATION_SECONDS = 30; // ゲーム全体の制限時間
 const QUESTION_DURATION_SECONDS = 5; // 1問の制限時間

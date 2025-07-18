@@ -1,7 +1,4 @@
-export interface TypingQuestion {
-  text: string;
-  romaji: string;
-}
+import type { TypingQuestion } from "./TypingQuestion";
 
 export const typingQuestions: TypingQuestion[] = [
   {

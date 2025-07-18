@@ -3,25 +3,26 @@
 import { useRouter } from "next/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ChakraButton from "./ChakraButton";
+import { HStack, VStack } from "@chakra-ui/react";
 
 function HomePageButtons() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center space-y-8">
+    <VStack spacing={8}>
       <LanguageSwitcher />
-      <ChakraButton onClick={() => router.push("/game")}>
+      <ChakraButton size="lg" onClick={() => router.push("/game")}>
         Play
       </ChakraButton>
-      <div className="flex space-x-4">
-        <ChakraButton onClick={() => router.push("/login")}>
+      <HStack spacing={4}>
+        <ChakraButton size="lg" onClick={() => router.push("/login")}>
           Login
         </ChakraButton>
-        <ChakraButton onClick={() => router.push("/signin")}>
+        <ChakraButton size="lg" onClick={() => router.push("/signin")}>
           Signin
         </ChakraButton>
-      </div>
-    </div>
+      </HStack>
+    </VStack>
   );
 }
 

@@ -2,30 +2,27 @@
 
 import Header from "@/components/Header";
 import HomePageButtons from "@/components/HomePageButtons";
+import { Box, Center, Heading, VStack } from "@chakra-ui/react";
 
 function Home() {
   return (
-    <div className="relative min-h-screen">
+    <Box minH="100vh">
       <Header />
-      <main
-        className="flex flex-col items-center justify-center min-h-screen
-  pt-24 md:pt-32"
-      >
-        <section
-          className="flex-grow flex items-center justify-center
-  text-center"
-        >
-          <h1 className="text-6xl md:text-8xl font-bold">
+      <Center as="main" minH="100vh" px="4">
+        <VStack spacing={12} textAlign="center">
+          <Heading
+            as="h1"
+            size={{ base: "2xl", md: "4xl" }}
+            fontWeight="bold"
+          >
             Welcome to the
             <br />
             Typing Game
-          </h1>
-        </section>
-        <div className="flex gap-4 pb-12">
+          </Heading>
           <HomePageButtons />
-        </div>
-      </main>
-    </div>
+        </VStack>
+      </Center>
+    </Box>
   );
 }
 

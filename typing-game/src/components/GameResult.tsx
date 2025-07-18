@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import SimpleButton from "@/components/SimpleButton";
+import ChakraButton from "@/components/ChakraButton";
 
 function GameResult() {
   const searchParams = useSearchParams();
@@ -16,24 +16,12 @@ function GameResult() {
         <p className="text-7xl font-bold text-yellow-400">{score}</p>
       </div>
       <div className="flex justify-center gap-4 mt-8">
-        <SimpleButton
-          height={100}
-          width={300}
-          textColor="#FFFFFF"
-          backgroundColor="#4A90E2"
-          onClick={() => router.push("/game")}
-        >
+        <ChakraButton onClick={() => router.push("/game")}>
           Play Again
-        </SimpleButton>
-        <SimpleButton
-          height={100}
-          width={300}
-          textColor="#FFFFFF"
-          backgroundColor="#4A90E2"
-          onClick={() => router.push("/")}
-        >
+        </ChakraButton>
+        <ChakraButton onClick={() => router.push("/")}>
           Back to Home
-        </SimpleButton>
+        </ChakraButton>
       </div>
     </div>
   );

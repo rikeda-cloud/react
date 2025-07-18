@@ -1,8 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import type { TypingQuestion } from "@/data/TypingQuestion";
 import { typingQuestionsJa } from "@/data/TypingQuestionsJa";
+import { typingQuestionsEn } from "@/data/TypingQuestionsEn";
+import { RootState } from "@/store/store";
 
 const GAME_DURATION_SECONDS = 30; // ゲーム全体の制限時間
 const QUESTION_DURATION_SECONDS = 5; // 1問の制限時間
@@ -18,13 +21,14 @@ export interface TypingGameResult {
   isGameFinished: boolean;
 }
 
-const getRandomQuestion = () => {
-  return typingQuestionsJa[
-    Math.floor(Math.random() * typingQuestionsJa.length)
-  ];
-};
-
 export const useTypingGame = (): TypingGameResult => {
+  const lang = useSelector((state: RootState) => state.language.selected);
+  const questions = lang === "en" ? typingQuestionsEn : typingQuestionsJa;
+
+  const getRandomQuestion = useCallback(() => {
+    return questions[Math.floor(Math.random() * questions.length)];
+  }, [questions]);
+
   const [currentQuestion, setCurrentQuestion] = useState<TypingQuestion | null>(
     null,
   );
@@ -40,11 +44,10 @@ export const useTypingGame = (): TypingGameResult => {
     setCurrentQuestion(getRandomQuestion());
     setIdx(0);
     setQuestionTimeProgress(0);
-  }, []);
+  }, [getRandomQuestion]);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      // キーボードのキーが押されたときの処理
       if (currentQuestion?.romaji[idx] === e.key) {
         setIdx((prevIdx) => prevIdx + 1);
       }
@@ -55,7 +58,7 @@ export const useTypingGame = (): TypingGameResult => {
   useEffect(() => {
     // 初回のみ、クライアント側で値をセット
     setCurrentQuestion(getRandomQuestion());
-  }, []);
+  }, [getRandomQuestion]);
 
   useEffect(() => {
     if (isGameFinished) return;

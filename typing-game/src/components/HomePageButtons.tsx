@@ -1,45 +1,41 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import LanguageSwitcher from "./LanguageSwitcher";
 import SimpleButton from "./SimpleButton";
-
-interface ButtonConfig {
-  label: string;
-  path: string;
-  textColor?: string;
-  backgroundColor?: string;
-}
 
 function HomePageButtons() {
   const router = useRouter();
-  const btnSize = { h: 100, w: 200 };
-
-  const buttons: ButtonConfig[] = [
-    { label: "Login", path: "/login" },
-    { label: "Signin", path: "/signin" },
-    {
-      label: "Play",
-      path: "/game",
-      textColor: "#FFFFFF",
-      backgroundColor: "#2563F0",
-    },
-  ];
 
   return (
-    <>
-      {buttons.map((btn) => (
+    <div className="flex flex-col items-center space-y-8">
+      <LanguageSwitcher />
+      <SimpleButton
+        height={100}
+        width={200}
+        textColor="#FFFFFF"
+        backgroundColor="#2563F0"
+        onClick={() => router.push("/game")}
+      >
+        Play
+      </SimpleButton>
+      <div className="flex space-x-4">
         <SimpleButton
-          key={btn.label}
-          height={btnSize.h}
-          width={btnSize.w}
-          textColor={btn.textColor}
-          backgroundColor={btn.backgroundColor}
-          onClick={() => router.push(btn.path)}
+          height={60}
+          width={120}
+          onClick={() => router.push("/login")}
         >
-          {btn.label}
+          Login
         </SimpleButton>
-      ))}
-    </>
+        <SimpleButton
+          height={60}
+          width={120}
+          onClick={() => router.push("/signin")}
+        >
+          Signin
+        </SimpleButton>
+      </div>
+    </div>
   );
 }
 

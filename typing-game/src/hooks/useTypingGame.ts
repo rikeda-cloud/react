@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { typingQuestions } from "@/data/TypingQuestions";
-import { type TypingQuestion } from "@/data/TypingQuestion";
+import type { TypingQuestion } from "@/data/TypingQuestion";
+import { typingQuestionsJa } from "@/data/TypingQuestionsJa";
 
 const GAME_DURATION_SECONDS = 30; // ゲーム全体の制限時間
 const QUESTION_DURATION_SECONDS = 5; // 1問の制限時間
@@ -19,7 +19,9 @@ export interface TypingGameResult {
 }
 
 const getRandomQuestion = () => {
-  return typingQuestions[Math.floor(Math.random() * typingQuestions.length)];
+  return typingQuestionsJa[
+    Math.floor(Math.random() * typingQuestionsJa.length)
+  ];
 };
 
 export const useTypingGame = (): TypingGameResult => {

@@ -1,6 +1,6 @@
 import type { TypingQuestion } from "./TypingQuestion";
 
-export const typingQuestions: TypingQuestion[] = [
+export const typingQuestionsJa: TypingQuestion[] = [
   {
     text: "隣の客はよく柿食う客だ",
     romaji: "tonarinokyakuhayokukakikuukyakuda",

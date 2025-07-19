@@ -6,10 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "fmt": "npx @biomejs/biome format --write",
-    "lint": "npx @biomejs/biome lint --write",
-    "check": "npx @biomejs/biome check --write",
-    "ci": "npx @biomejs/biome ci"
+    "fmt": "npx @biomejs/biome format --write ./src",
+    "lint": "npx @biomejs/biome lint ./src",
+    "check": "npx @biomejs/biome check ./src",
+    "ci": "npx @biomejs/biome ci ./src"
   },
   "dependencies": {
     "@chakra-ui/next-js": "^2.4.2",

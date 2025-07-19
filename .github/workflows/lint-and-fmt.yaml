@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run lint and format check
-        run: cd typing-game && make check
+        run: cd typing-game && npm run ci

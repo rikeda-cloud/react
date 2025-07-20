@@ -2,7 +2,7 @@
 
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { setLanguage } from "@/store/languageSlice";
+import { type Languages, setLanguage } from "@/store/languageSlice";
 import type { RootState } from "@/store/store";
 
 function ChakraLanguageSwitcher() {
@@ -11,7 +11,7 @@ function ChakraLanguageSwitcher() {
     (state: RootState) => state.language.selected,
   );
 
-  const handleLanguageChange = (lang: "ja" | "en") => {
+  const handleLanguageChange = (lang: Languages) => {
     dispatch(setLanguage(lang));
   };
 

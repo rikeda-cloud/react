@@ -2,8 +2,10 @@
 
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
+export type Languages = "ja" | "en";
+
 interface LanguageState {
-  selected: "ja" | "en";
+  selected: Languages;
 }
 
 const initialState: LanguageState = {
@@ -14,7 +16,7 @@ const languageSlice = createSlice({
   name: "language",
   initialState,
   reducers: {
-    setLanguage: (state, action: PayloadAction<"ja" | "en">) => {
+    setLanguage: (state, action: PayloadAction<Languages>) => {
       state.selected = action.payload;
     },
   },

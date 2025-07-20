@@ -1,8 +1,8 @@
 "use client";
 
 import { Suspense } from "react";
-import GameResult from "@/components/GameResult";
 import Header from "@/components/Header";
+import GameResult from "./GameResult";
 
 function ResultPage() {
   return (

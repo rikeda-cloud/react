@@ -3,8 +3,8 @@
 import { HStack, VStack } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { RiLoginBoxLine, RiPlayLine, RiUserAddLine } from "react-icons/ri";
-import ChakraButton from "./ChakraButton";
-import ChakraLanguageSwitcher from "./ChakraLanguageSwitcher";
+import ChakraButton from "@/components/ChakraButton";
+import ChakraLanguageSwitcher from "@/components/ChakraLanguageSwitcher";
 
 function HomePageButtons() {
   const router = useRouter();

@@ -2,7 +2,7 @@
 
 import { Box, Center, Heading, VStack } from "@chakra-ui/react";
 import Header from "@/components/Header";
-import HomePageButtons from "@/components/HomePageButtons";
+import HomePageButtons from "./HomePageButtons";
 
 function Home() {
   return (

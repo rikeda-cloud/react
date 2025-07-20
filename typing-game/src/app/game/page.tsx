@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Header from "@/components/Header";
 import ProgressBar from "@/components/ProgressBar";
-import { useTypingGame } from "@/hooks/useTypingGame";
+import { useTypingGame } from "./useTypingGame";
 
 function GamePage() {
   const router = useRouter();

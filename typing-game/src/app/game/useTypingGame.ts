@@ -2,10 +2,10 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import type { TypingQuestion } from "@/data/TypingQuestion";
-import { typingQuestionsEn } from "@/data/TypingQuestionsEn";
-import { typingQuestionsJa } from "@/data/TypingQuestionsJa";
 import type { RootState } from "@/store/store";
+import type { TypingQuestion } from "./data/TypingQuestion";
+import { typingQuestionsEn } from "./data/TypingQuestionsEn";
+import { typingQuestionsJa } from "./data/TypingQuestionsJa";
 
 const GAME_DURATION_SECONDS = 30; // ゲーム全体の制限時間
 const QUESTION_DURATION_SECONDS = 5; // 1問の制限時間
